@@ -1,5 +1,7 @@
 package Game;
 
+import Blocks.Diamond;
+import Blocks.Rockford;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -35,7 +37,22 @@ public class GameStart extends Application {
         reader = new MapReader(stage);
         String[][] mapBlock = reader.getMapBlocks();
         Integer[] playerPosition = reader.getPlayerPosition();
-        Board board = new Board(mapBlock, playerPosition);
+        String[] boardSize = reader.getboardSize();
+        String[] diamond = reader.getDiamondPosition();
+        Diamond[] diamonds = new Diamond[(diamond.length -1) /2];
+        for ( int i = 1; i <= (diamond.length -1) /2; i++){
+            Diamond diamond1 = new Diamond(Integer.parseInt(diamond[(i*2)-1]),Integer.parseInt(diamond[(i*2)]));
+            diamonds[i-1] = diamond1;
+        }
+        System.out.println("AQUI" + diamonds[1].getyDiamond());
+
+
+        Board board = new Board(mapBlock, playerPosition, boardSize, diamonds);
+        //Rockford rockford = new Rockford(playerPosition);
+
+
+        Rockford x = Rockford.getInstance();
+        System.out.println("String from x is " + x.s);
         Scene scene = new Scene(board);
         stage.setScene(scene);
         stage.show();
