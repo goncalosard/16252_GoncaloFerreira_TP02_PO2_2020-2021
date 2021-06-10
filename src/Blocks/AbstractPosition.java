@@ -15,8 +15,8 @@ public abstract class AbstractPosition extends Button {
 
 
     public AbstractPosition(int xBoard, int yBoard) {
-        this.xBoard= xBoard;
-        this.yBoard= yBoard;
+        this.xBoard = xBoard;
+        this.yBoard = yBoard;
 
     }
 

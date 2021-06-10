@@ -2,6 +2,7 @@ package Game;
 
 import Blocks.Diamond;
 import Blocks.Rockford;
+import Model.Game;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ public class GameStart extends Application {
     @Override
     public void start(Stage stage) {
 
+        Game game = new Game();
+
         this.stage = stage;
 
         reader = new MapReader(stage);
@@ -41,18 +44,27 @@ public class GameStart extends Application {
         String[] diamond = reader.getDiamondPosition();
         Diamond[] diamonds = new Diamond[(diamond.length -1) /2];
         for ( int i = 1; i <= (diamond.length -1) /2; i++){
-            Diamond diamond1 = new Diamond(Integer.parseInt(diamond[(i*2)-1]),Integer.parseInt(diamond[(i*2)]));
+            int x = Integer.parseInt(diamond[(i*2)-1]);
+            int y = Integer.parseInt(diamond[(i*2)]);
+            Diamond diamond1 = new Diamond(x,y);
             diamonds[i-1] = diamond1;
+            mapBlock[x][y] = "diamond";
         }
         System.out.println("AQUI" + diamonds[1].getyDiamond());
 
+        Rockford player = Rockford.getInstance();
+        player.setxPos(playerPosition[0]);
+        player.setyPos(playerPosition[1]);
 
-        Board board = new Board(mapBlock, playerPosition, boardSize, diamonds);
+
+       // mapBlock[player.getxPos()][player.getyPos()] = "null";
+
+
+
+        Board board = new Board(mapBlock, playerPosition, boardSize, diamonds, player, game);
         //Rockford rockford = new Rockford(playerPosition);
 
 
-        Rockford x = Rockford.getInstance();
-        System.out.println("String from x is " + x.s);
         Scene scene = new Scene(board);
         stage.setScene(scene);
         stage.show();

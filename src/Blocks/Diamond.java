@@ -15,15 +15,14 @@ public class Diamond extends Button {
     private int yDiamond;
 
     public static final Image DIAMOND = new Image("resources/diamond.jpg");
-    private final ImageView imageView;
 
     public Diamond(int xDiamond, int yDiamond) {
-        this.xDiamond= xDiamond;
+        this.xDiamond = xDiamond;
         this.yDiamond = yDiamond;
 
 
-        this.imageView = new ImageView(DIAMOND);
-        this.setGraphic(this.imageView);
+        ImageView imageView = new ImageView(DIAMOND);
+        this.setGraphic(imageView);
 
     }
 
